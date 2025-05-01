@@ -1,0 +1,9 @@
+
+
+.output{
+
+    width: 200px;
+    height: 200px;
+    border: 2px black solid;
+    background-color: rgb(230, 230, 230);
+}

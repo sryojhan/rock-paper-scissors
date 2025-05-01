@@ -37,14 +37,6 @@ function tranlateOption(option){
     return "Scissors";
 }
 
-function printChoices(human, computer){
-
-
-    console.log("Human chose: " + tranlateOption(human));
-    console.log("Computer chose: " + tranlateOption(computer));
-
-}
-
 function isDraw(humanChoice, computerChoice){
 
     return humanChoice === computerChoice;
@@ -74,96 +66,92 @@ function humanWins(humanChoice, computerChoice){
 }
 
 
-function printScore(humanScore, computerScore, result){
-
-    console.log(result);
-
-    console.log("Human Score: " + humanScore);
-    console.log("Computer Score: " + computerScore);
-
-}
-
-
 function isGameFinished(humanScore, computerScore){
 
     return humanScore >= 3 || computerScore >= 3;
 }
 
-function printGameResult(humanScore, computerScore){
 
-    if(humanScore > computerScore) console.log("Human wins");
-    else console.log("Computer wins");
+let rockBtn = document.querySelector('#rock');
+let paperBtn = document.querySelector('#paper');
+let scissorsBtn = document.querySelector('#scissors');
+
+let output = document.querySelector('#output');
+
+let humanScore = 0;
+let computerScore = 0;
+
+function clearOutput(){
+
+    output.textContent = "";
 }
 
-function clearConsole(){
-    console.clear();
+function print(mssg = ""){
+
+    output.textContent += mssg + "\n";
 }
 
-function playAgain(){
+function play(human){
 
-    let answer = prompt("Do you want to play again? (Yes/No)").toLowerCase();
+    let computer = computerChoice();
+    
+    let result = "";
 
-    if(answer === "yes") return true;
-    return false;
-}
+    if(isDraw(human, computer)){
 
-function play(){
+        result = "is a draw";
+    }
+    else {
 
-    while(true)
-    {
+        if(humanWins(human, computer)){
 
-        /*
-            Rock = 0
-            Paper = 1
-            Scissors = 2
-        */
-
-        let humanScore = 0;
-        let computerScore = 0;
-
-
-        while(!isGameFinished(humanScore, computerScore)){
-
-
-            let human = humanChoice();
-            let computer = computerChoice();
-
-            clearConsole();
-
-            /*Game logic*/
-
-            let result = "";
-
-            if(isDraw(human, computer)){
-
-                result = "is a draw";
-            }
-            else {
-
-                if(humanWins(human, computer)){
-
-                    result = "human wins";
-                    humanScore += 1;
-                }
-                else{
-
-                    result = "computer wins";
-                    computerScore += 1;
-                }
-            }
-
-
-            printChoices(human, computer);
-            printScore(humanScore, computerScore, result);
+            result = "human wins";
+            humanScore += 1;
         }
+        else{
 
-        printGameResult(humanScore, computerScore);
-
-        if(!playAgain())
-            break;
+            result = "computer wins";
+            computerScore += 1;
+        }
     }
 
+    clearOutput();
+
+    print("Human chose: " + tranlateOption( human));
+    print("Computer chose: " + tranlateOption(computer));
+
+    print();
+
+    print("Human Score: " + humanScore);
+    print("Computer Score: " + computerScore);
+
+    print();
+
+    print(result);
+
+    if(isGameFinished(humanScore, computerScore)){
+
+        print("\n");
+
+        if(humanScore > computerScore) print("Human wins the game");
+        else print("Computer wins the game");
+
+        print("select to start again");
+
+        humanScore = 0;
+        computerScore = 0;
+    }
 }
 
+rockBtn.addEventListener('click', () =>{
+    play(0);
+});
 
-play();
+
+paperBtn.addEventListener('click', () =>{
+    play(1);
+});
+
+scissorsBtn.addEventListener('click', () =>{
+    play(2);
+});
