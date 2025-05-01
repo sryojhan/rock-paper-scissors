@@ -2,8 +2,33 @@
 
 .output{
 
-    width: 200px;
-    height: 200px;
+    width: 175px;
+    height: 250px;
     border: 2px black solid;
     background-color: rgb(230, 230, 230);
+
+
+    margin-left: 400px;
+}
+
+.selector-container{
+
+    width: 300px;
+    margin: 80px 150px 0 150px;
+    text-align: center;
+}
+
+
+.selector-container button{
+
+    font-size: large;
+}
+
+
+body{
+
+    background-size: 600px;
+    background-repeat:no-repeat;
+    background-position: top left;
+    background-image: url('images/backgroundPoker.jpg');
 }
